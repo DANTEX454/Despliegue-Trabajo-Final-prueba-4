@@ -27,4 +27,6 @@ def limpiar(df):
         d[c] = pd.to_numeric(d[c], errors="coerce")
     for c in CAT:
         d[c] = d[c].where(d[c].isna(), d[c].astype(str).str.strip())
-    d.loc[(d.Tenure < 0) | (d.Tenure > 120),
+       d.loc[(d.Tenure < 0) | (d.Tenure > 120), "Tenure"] = np.nan
+    d.loc[(d.TotalSpent <= 0) | (d.TotalSpent > 1e5), "TotalSpent"] = np.nan
+    d.loc[(d.LastPurchaseDays < 0) | (d.LastPurchaseDays > 365), "LastPurchaseDays"] = np.nan
